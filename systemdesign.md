@@ -13,11 +13,20 @@ The typography is a dialogue between classical elegance and technical rigor.
 - **Serif**: `Playfair Display` — Used for headings and primary narrative elements to provide a timeless, high-fashion feel.
 - **Mono**: `JetBrains Mono` — Used for system logs, technical metadata, and UI labels to reinforce the "Kernel OS" terminal aesthetic.
 
-### Color Palette
-A deep, atmospheric foundation with high-contrast neon highlights.
-- **Navy** (`#0a0f1a`): The void. A deep, saturated background that provides infinite depth.
-- **Neon Cyan** (`#00ffcc`): The pulse. A vibrant, glowing signature color used for data tracks, UI accents, and interactive elements.
-- **Translucent Layers**: Utilizing varying opacities of Cyan and White to create "Glassmorphism" effects.
+### Color Palette (The "Prism" System)
+The palette is built on the principle of *Atmospheric Contrast*, where a deep void is punctuated by high-frequency light.
+
+| Role | Hex | Description |
+| :--- | :--- | :--- |
+| **Background (Navy)** | `#0a0f1a` | The primary canvas. Provides a deep, professional atmosphere that allows neon elements to pop. |
+| **Primary (Neon Cyan)** | `#00ffcc` | The "pulse" of the system. Used for interactive states, key data visualizations, and the signature boot sequence. |
+| **Content (White)** | `#ffffff` | High-legibility tier-1 information and primary serif narrative text. |
+| **Accent (Translucent)** | `rgba(0, 255, 204, 0.2)` | The "Glass" effect. Used for borders, grid lines, and backdrop filters to create depth without clutter. |
+
+#### Theme Principles:
+- **Prism Refraction**: Utilizing white and cyan in gradients to simulate light passing through glass edges.
+- **Glassmorphism**: Layered semi-transparent containers that maintain context of the underlying architectural grid.
+- **Visual Hierarchy**: Neon is reserved for action and system status, while muted translucent layers handle structural boundaries.
 
 ### Spacing & Grid
 - **Blueprint Grid**: A strict `40px x 40px` architectural grid underpins the entire experience, visible during the boot sequence and as a subtle backdrop to section transitions.
