@@ -7,8 +7,8 @@ interface PreloaderProps {
 
 const BOOT_LINES = [
   { text: "[SYS]  Initializing runtime environment...", delay: 0.1 },
-  { text: "[DISK] Mount /dev/refokus_v2.1 ........... OK", delay: 0.6 },
-  { text: "[MEM]  Allocating heap: 2048mb ........... OK", delay: 1.1 },
+  { text: "[DISK] Mount /dev/kernel_v2.1 ........... OK", delay: 0.6 },
+  { text: "[DISK] Unpacking core_kernel.tar.gz ..... OK", delay: 1.2 },
   { text: "[NET]  Establishing secure channel ........ OK", delay: 1.6 },
   { text: "[LENIS] Smooth scroll engine .............. INIT", delay: 2.1 },
   { text: "[GSAP]  Animation core v3.12 .............. LOADED", delay: 2.5 },
@@ -16,7 +16,7 @@ const BOOT_LINES = [
   { text: "[AUTH]  Signature: 0xRF2A_VERIFIED ........ OK", delay: 3.3 },
   { text: "", delay: 3.7 },
   { text: "▸ ALL SYSTEMS NOMINAL.", delay: 3.8 },
-  { text: "▸ BOOTING REFOKUS...", delay: 4.3 },
+  { text: "▸ BOOTING KERNEL...", delay: 4.3 },
 ];
 
 export default function Preloader({ onComplete }: PreloaderProps) {
@@ -203,7 +203,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           }}
         >
           <span style={{ color: "#00ffcc", fontSize: 11, letterSpacing: 2 }}>
-            REFOKUS_OS v2.1
+            KERNEL_OS v2.1
           </span>
           <span style={{ color: "#00ffcc", fontSize: 11, letterSpacing: 2 }}>
             BOOT_SEQ_ACTIVE
@@ -238,7 +238,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
               }}
             />
             <span style={{ color: "rgba(0,255,204,0.5)", fontSize: 11 }}>
-              /bin/refokus --init --verbose
+              /bin/kernel --init --verbose
             </span>
           </div>
 

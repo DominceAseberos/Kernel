@@ -44,6 +44,7 @@ export const Stack = () => {
 
   return (
     <section ref={stackContainerRef} className="relative bg-[#05080f] pb-32 z-20">
+      <h2 className="sr-only">Our Execution Stack</h2>
       <div className="absolute inset-0 blueprint-grid opacity-10" />
       
       {/* Stack 1 */}

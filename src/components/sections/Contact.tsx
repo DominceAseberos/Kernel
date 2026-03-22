@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import gsap from 'gsap';
+import { Terminal, Send, CheckCircle2 } from 'lucide-react';
+import { useAudio } from '../../context/AudioProvider';
 
 export const Contact = () => {
+  const { playTick } = useAudio();
   const [inputValue, setInputValue] = useState('');
-  const [status, setStatus] = useState('IDLE');
+  const [formState, setFormState] = useState<'idle' | 'sending' | 'success'>('idle');
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -11,13 +13,13 @@ export const Contact = () => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
-    setStatus('SENDING');
+    setFormState('sending');
     
     // Simulate signal transmission
     setTimeout(() => {
-      setStatus('SUCCESS');
+      setFormState('success');
       setInputValue('');
-      setTimeout(() => setStatus('IDLE'), 5000);
+      setTimeout(() => setFormState('idle'), 5000);
     }, 2000);
   };
 
@@ -49,11 +51,23 @@ export const Contact = () => {
             {/* Scanline overlay */}
             <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,255,204,0.02)_50%)] bg-[length:100%_4px] pointer-events-none" />
             
-            {status === 'IDLE' && (
+            {formState === 'idle' && (
                 <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-6">
                     <div className="flex items-start gap-4 font-mono text-xl md:text-3xl">
                         <span className="text-[#00ffcc] animate-pulse">❯</span>
                         <div className="flex-1">
+                            <input
+                                type="text"
+                                onMouseEnter={playTick}
+                                placeholder="IDENTIFYING_NAME"
+                                className="w-full bg-transparent border-none outline-none text-white placeholder:text-white/10 uppercase mb-4"
+                            />
+                            <input
+                                type="email"
+                                onMouseEnter={playTick}
+                                placeholder="CONTACT_CHANNELS"
+                                className="w-full bg-transparent border-none outline-none text-white placeholder:text-white/10 uppercase mb-4"
+                            />
                             <input
                                 ref={inputRef}
                                 type="text"
@@ -69,10 +83,18 @@ export const Contact = () => {
                         <span>SYS.INPUT_TYPE: MESSAGE_PACKET</span>
                         <span>PRESS [ENTER] TO DISPATCH</span>
                     </div>
+                    <button
+                        type="submit"
+                        onMouseEnter={playTick}
+                        className="w-full py-4 border border-[#00ffcc]/30 bg-[#00ffcc]/5 text-[#00ffcc] font-mono text-xs tracking-[0.5em] hover:bg-[#00ffcc] hover:text-black transition-all group relative overflow-hidden"
+                    >
+                        <span className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(0,255,204,0.1)_50%,transparent_100%)] animate-[scan_2s_infinite_linear] opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <span className="relative z-10">TRANSMIT_INQUIRY</span>
+                    </button>
                 </form>
             )}
 
-            {status === 'SENDING' && (
+            {formState === 'sending' && (
                 <div className="relative z-10 py-12 flex flex-col items-center justify-center gap-4">
                     <div className="w-full h-1 bg-white/5 relative overflow-hidden">
                         <div className="absolute inset-0 bg-[#00ffcc] animate-[loading_2s_infinite]" />
@@ -81,7 +103,7 @@ export const Contact = () => {
                 </div>
             )}
 
-            {status === 'SUCCESS' && (
+            {formState === 'success' && (
                 <div className="relative z-10 py-12 flex flex-col items-center justify-center gap-4 text-center">
                     <div className="w-20 h-20 rounded-full border border-[#00ffcc] flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(0,255,204,0.3)]">
                         <span className="text-[#00ffcc] text-4xl font-bold">✓</span>

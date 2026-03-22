@@ -9,22 +9,56 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
 
-import { Navbar } from './components/Navbar';
-import { Speedometer } from './components/Speedometer';
-import { Hero } from './components/sections/Hero';
-import { About } from './components/sections/About';
-import { Marquee } from './components/sections/Marquee';
-import { ProjectSection } from './components/sections/ProjectSection';
-import { Stack } from './components/sections/Stack';
-import { Testimonials } from './components/sections/Testimonials';
-import { Contact } from './components/sections/Contact';
-import { Footer } from './components/sections/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { NotFound } from './pages/NotFound';
+import { AudioProvider, useAudio } from './context/AudioProvider';
 
 import Preloader from './components/ui/Preloader';
 import Cursor from './components/ui/Cursor';
 
+import { Navbar } from './components/Navbar';
+import { PageTransition } from './components/ui/PageTransition';
+
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.normalizeScroll(false);
+
+const AppContent = ({ isBooted, isMobile, handleBootComplete }: any) => {
+  const { updateScrollHum, playBoot } = useAudio();
+
+  useEffect(() => {
+    if (isBooted) {
+      setTimeout(playBoot, 100);
+    }
+  }, [isBooted, playBoot]);
+
+  const onBootComplete = () => {
+    handleBootComplete();
+    // @ts-ignore
+    if (window.lenis) {
+      // @ts-ignore
+      window.lenis.on('scroll', (e: any) => {
+        updateScrollHum(e.velocity);
+      });
+    }
+  };
+
+  return (
+    <div className="bg-[#0a0f1a] min-h-screen text-white font-serif selection:bg-[#00ffcc]/30">
+      {!isBooted && <Preloader onComplete={onBootComplete} />}
+      {!isMobile && <Cursor />}
+
+      <Router>
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={isBooted && <Home />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
+      </Router>
+    </div>
+  );
+};
 
 export default function App() {
   const [isBooted, setIsBooted] = useState(false);
@@ -49,52 +83,15 @@ export default function App() {
     window.lenis = lenis;
 
     setIsBooted(true);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        // ── FIX 2: Animate opacity only — NO y translation ───────────────────
-        // The previous version animated y:30→0 which left transform:matrix()
-        // on #hero-trigger. Any transform on a parent of a position:fixed
-        // child (the pinned Hero section) creates a new containing block
-        // and breaks the pin visually.
-        // Opacity-only fade has zero transform side effects.
-        gsap.fromTo(
-          '#hero-trigger',
-          { opacity: 0 },
-          {
-            opacity: 1,
-            duration: 1,
-            ease: 'power2.out',
-            // Guarantee no transform residue
-            clearProps: 'transform,y,x',
-          }
-        );
-      });
-    });
   }, []);
 
   return (
-    <div className="bg-[#0a0f1a] min-h-screen text-white font-serif selection:bg-[#00ffcc]/30">
-      <Preloader onComplete={handleBootComplete} />
-      {!isMobile && <Cursor />}
-
-      {isBooted && (
-        <div id="content-mount">
-          <Navbar />
-          <Speedometer />
-          {/* ── NO transform-inducing animations on this wrapper ── */}
-          <div id="hero-trigger">
-            <Hero />
-          </div>
-          <About />
-          <Marquee />
-          <ProjectSection />
-          <Testimonials />
-          <Stack />
-          <Contact />
-          <Footer />
-        </div>
-      )}
-    </div>
+    <AudioProvider>
+      <AppContent 
+        isBooted={isBooted} 
+        isMobile={isMobile} 
+        handleBootComplete={handleBootComplete} 
+      />
+    </AudioProvider>
   );
 }

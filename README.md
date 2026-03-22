@@ -1,5 +1,5 @@
 
-# Refokus
+# KERNEL
 
 High-end scroll-triggered animations with a Prism & Glass aesthetic.
 
@@ -12,4 +12,4 @@ High-end scroll-triggered animations with a Prism & Glass aesthetic.
    `npm install`
 2. Run the app:
    `npm run dev`
-# Refokus
+# KERNEL

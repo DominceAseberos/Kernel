@@ -1,25 +1,26 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useAudio } from '../../context/AudioProvider';
 
 const TESTIMONIALS = [
   {
-    id: "LOG_01",
-    sender: "ARCHITECH",
-    timestamp: "2026-03-22T16:20:01Z",
-    text: "THE ARCHITECTURAL DEPTH IN THEIR MOTION SYSTEMS IS UNMATCHED. A MASTERCLASS IN KINETIC DESIGN."
+    id: 1,
+    text: "KERNEL DIDN'T JUST BUILD A SITE; THEY COMPILED A DIGITAL ATMOSPHERE. THE PRECISION IS UNREAL.",
+    author: "ELON_M",
+    role: "FOUNDER @ X_CORP"
   },
   {
-    id: "LOG_02",
-    sender: "GLASSCORP",
-    timestamp: "2026-03-22T16:20:15Z",
-    text: "REFOKUS DIDN'T JUST BUILD A SITE; THEY BUILT A DIGITAL ATMOSPHERE. THE GLASSMORPHISM IS BEYOND STATE-OF-THE-ART."
+    id: 2,
+    text: "THE FASTEST DEVELOPMENT CYCLE WE'VE EVER SEEN. THE 'PRISM' STYLE IS THE NEW STANDARD.",
+    author: "SAM_A",
+    role: "CEO @ OPEN_SYS"
   },
   {
-    id: "LOG_03",
-    sender: "NEURAL_STREAM",
-    timestamp: "2026-03-22T16:20:30Z",
-    text: "KINETIC CHOREOGRAPHY THAT FEELS ALIVE. HIGH PERFORMANCE AT ITS CORE. THE NEURAL NET INTEGRATION IS SEAMLESS."
+    id: 3,
+    text: "A MASTERCLASS IN KINETIC DESIGN. KERNEL IS OPERATING ON A DIFFERENT FREQUENCY.",
+    author: "JENSEN_H",
+    role: "ENGINEERING @ NEURAL_NET"
   }
 ];
 
@@ -31,85 +32,80 @@ const LOGOS = [
 ];
 
 export const Testimonials = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { playTick } = useAudio();
+  const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Pinning the testimonials section to reveal logs
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=150%",
-        pin: true,
-        scrub: true,
-      });
-
-      // Animating the entries one by one
-      gsap.from(".transmission-entry", {
+      // Transmission text animation
+      gsap.from(".transmission-line", {
         opacity: 0,
         x: -20,
-        stagger: 0.5,
+        stagger: 0.2,
+        duration: 0.8,
         scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 40%",
-          end: "bottom bottom",
-          scrub: true,
+          trigger: sectionRef.current,
+          start: "top 70%",
         }
       });
 
-      // Horizontal Logo Infinity Scroll
-      const totalWidth = trackRef.current?.scrollWidth || 0;
-      gsap.to(trackRef.current, {
-        x: -totalWidth / 2,
-        duration: 20,
-        ease: "none",
-        repeat: -1,
-      });
+      // Infinite logo scroll
+      if (trackRef.current) {
+        gsap.to(trackRef.current, {
+          xPercent: -50,
+          duration: 20,
+          repeat: -1,
+          ease: "none"
+        });
+      }
     });
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="min-h-screen bg-[#0a0f1a] relative flex flex-col items-center justify-center py-24 overflow-hidden z-20">
+    <section ref={sectionRef} id="testimonials" className="py-64 bg-[#0a0f1a] relative overflow-hidden z-20">
+      <h2 className="sr-only">Client Testimonials</h2>
       <div className="absolute inset-0 blueprint-grid opacity-10" />
       
-      {/* Terminal Title */}
-      <div className="max-w-4xl w-full px-6 mb-12">
-        <div className="flex items-center gap-4 mb-8 opacity-40">
-            <div className="w-2 h-2 rounded-full bg-[#00ffcc] animate-pulse" />
-            <span className="font-mono text-xs tracking-widest text-[#00ffcc]">SYS.LOG // EXTERNAL_TRANSMISSIONS</span>
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
+        <div className="font-mono text-[10px] text-[#00ffcc] mb-12 flex items-center gap-4">
+          <span className="w-2 h-2 bg-[#00ffcc] rounded-full animate-pulse" />
+          TRANSMISSION_LOG_v4.0
         </div>
 
-        {/* Transmission Log */}
-        <div className="space-y-8">
-          {TESTIMONIALS.map((log) => (
-            <div key={log.id} className="transmission-entry font-mono border-l border-[#00ffcc]/30 pl-6 relative">
-              <div className="absolute top-0 left-0 w-[1px] h-full bg-gradient-to-b from-[#00ffcc] to-transparent" />
-              <div className="flex justify-between items-center mb-2 opacity-60">
-                <span className="text-[10px] text-[#00ffcc]">{log.id} // FROM: {log.sender}</span>
-                <span className="text-[10px]">{log.timestamp}</span>
-              </div>
-              <p className="text-xl md:text-3xl font-bold text-white/90 leading-tight uppercase tracking-tight">
-                {log.text}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {TESTIMONIALS.map((t) => (
+            <div key={t.id} className="transmission-line border-l border-[#00ffcc]/30 pl-8 py-4 bg-white/2 hover:bg-[#00ffcc]/5 transition-colors group cursor-crosshair">
+              <p className="text-xl md:text-2xl font-serif italic text-white/90 mb-8 leading-tight group-hover:text-white transition-colors">
+                "{t.text}"
               </p>
+              <div>
+                <p className="font-mono text-[#00ffcc] text-xs font-bold">{t.author}</p>
+                <p className="font-mono text-white/40 text-[10px] uppercase tracking-widest">{t.role}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Logo Rail */}
-      <div className="w-full border-y border-white/5 bg-white/[0.02] py-12 relative overflow-hidden backdrop-blur-sm">
+      {/* Infinite Logo Rail */}
+      <div className="mt-48 relative py-12 border-y border-white/5 bg-white/2 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f1a] via-transparent to-[#0a0f1a] z-10" />
         <div ref={trackRef} className="flex gap-24 whitespace-nowrap px-12">
           {[...LOGOS, ...LOGOS].map((logo, i) => (
-            <img 
+            <div 
               key={i} 
-              src={logo} 
-              alt="Client Logo" 
-              className="h-12 md:h-20 w-auto grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-cell"
-            />
+              onMouseEnter={playTick}
+              className="flex-shrink-0 flex items-center justify-center grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer px-4"
+            >
+              <img 
+                src={logo} 
+                alt="Client Logo" 
+                className="h-12 md:h-20 w-auto"
+              />
+            </div>
           ))}
         </div>
       </div>

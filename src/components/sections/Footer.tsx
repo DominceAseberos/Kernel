@@ -1,64 +1,77 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight, Github, Twitter, Linkedin } from 'lucide-react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowRight, Github, Twitter, Linkedin } from 'lucide-react';
 import { MagneticButton } from '../ui/MagneticButton';
+import { useAudio } from '../../context/AudioProvider';
 
 export const Footer = () => {
+  const { playTick } = useAudio();
   const footerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (footerRef.current) {
-        gsap.fromTo(".footer-text-fill",
-          { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" },
-          {
-            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            ease: "power3.inOut",
-            scrollTrigger: {
-              trigger: footerRef.current,
-              start: "top 60%",
-              end: "center center",
-              scrub: 1,
-            }
-          }
-        );
-      }
+      gsap.from(".footer-content > *", {
+        opacity: 0,
+        y: 30,
+        stagger: 0.1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 90%",
+        }
+      });
     });
 
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <footer ref={footerRef} className="bg-[#020408] pt-32 pb-12 px-8 border-t border-[#00ffcc]/20 relative overflow-hidden z-20">
+    <footer ref={footerRef} className="bg-[#05080f] py-32 px-8 relative overflow-hidden border-t border-white/5 z-20">
       <div className="absolute inset-0 blueprint-grid opacity-5" />
       
-      <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center mb-32">
-        {/* Negative Space Reveal */}
-        <div className="relative">
-          <h2 className="text-[12vw] font-serif leading-none mb-8 text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>
-            LET'S BUILD
-          </h2>
-          <h2 className="footer-text-fill absolute top-0 left-0 text-[12vw] font-serif leading-none mb-8 text-[#00ffcc]" style={{ clipPath: 'polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)' }}>
-            LET'S BUILD
-          </h2>
+      <div className="max-w-7xl mx-auto flex flex-col items-center text-center gap-16 relative z-10">
+        <div className="footer-content space-y-4">
+          <h2 className="text-7xl md:text-9xl font-bold tracking-tighter opacity-10">KERNEL</h2>
+          <p className="font-mono text-xs text-[#00ffcc] opacity-60 tracking-widest">[ READY_FOR_DEPLOYMENT ]</p>
         </div>
         
-        <MagneticButton href="mailto:hello@example.com" className="font-mono text-white text-xl md:text-3xl hover:text-[#00ffcc] transition-colors flex items-center gap-4 group bg-white/5 px-8 py-4 rounded-full border border-white/10 backdrop-blur-md">
-          START CONSULTATION <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+        <MagneticButton 
+          href="mailto:consult@kernel.io" 
+          className="px-12 py-5 bg-[#00ffcc] text-black font-bold rounded-full text-lg tracking-widest shadow-[0_10px_40px_rgba(0,255,204,0.3)]"
+        >
+          START_CONSULTATION
         </MagneticButton>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 font-mono text-xs text-white/40">
-        <p>© 2026 REFOKUS. ALL RIGHTS RESERVED.</p>
+      <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 font-mono text-xs text-white/40 mt-32">
+        <p>© 2026 KERNEL. ALL RIGHTS RESERVED.</p>
         <div className="flex gap-6 mt-4 md:mt-0">
-          <a href="#" className="hover:text-[#00ffcc] transition-colors flex items-center gap-2"><Github className="w-4 h-4"/> GITHUB</a>
-          <a href="#" className="hover:text-[#00ffcc] transition-colors flex items-center gap-2"><Twitter className="w-4 h-4"/> TWITTER</a>
-          <a href="#" className="hover:text-[#00ffcc] transition-colors flex items-center gap-2"><Linkedin className="w-4 h-4"/> LINKEDIN</a>
+          <a 
+            href="#" 
+            onMouseEnter={playTick}
+            className="hover:text-[#00ffcc] transition-colors flex items-center gap-2"
+          >
+            <Github className="w-4 h-4"/> GITHUB
+          </a>
+          <a 
+            href="#" 
+            onMouseEnter={playTick}
+            className="hover:text-[#00ffcc] transition-colors flex items-center gap-2"
+          >
+            <Twitter className="w-4 h-4"/> X_CORP
+          </a>
+          <a 
+            href="#" 
+            onMouseEnter={playTick}
+            className="hover:text-[#00ffcc] transition-colors flex items-center gap-2"
+          >
+            <Linkedin className="w-4 h-4"/> LINKEDIN
+          </a>
         </div>
       </div>
+
+      {/* Background Glow */}
+      <div className="absolute -bottom-1/2 left-1/2 -translate-x-1/2 w-full h-full bg-[#00ffcc]/5 blur-[120px] rounded-full pointer-events-none" />
     </footer>
   );
 };
