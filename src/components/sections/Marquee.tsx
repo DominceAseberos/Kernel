@@ -58,9 +58,11 @@ export const Marquee = () => {
 
       {/* Floating Image Cards with Magnification Distortion */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-80 bg-white/5 border border-[#00ffcc]/30 rounded-xl overflow-hidden z-20 hidden md:block" style={{ backdropFilter: 'blur(5px) saturate(200%)' }}>
+         <img src="/assets/images/module-a.png" alt="Module A" className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen" />
          <div className="absolute bottom-4 left-4 font-mono text-xs text-[#00ffcc] bg-black/80 px-2 py-1 rounded">MODULE_A.tsx</div>
       </div>
       <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-48 h-64 bg-white/5 border border-[#00ffcc]/30 rounded-xl overflow-hidden z-20 hidden md:block" style={{ backdropFilter: 'blur(5px) saturate(200%)' }}>
+         <img src="/assets/images/module-b.png" alt="Module B" className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-screen" />
          <div className="absolute bottom-4 left-4 font-mono text-xs text-[#00ffcc] bg-black/80 px-2 py-1 rounded">CORE_LOGIC.ts</div>
       </div>
     </section>

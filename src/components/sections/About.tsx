@@ -79,13 +79,16 @@ export const About = () => {
       <div className="w-1 bg-white/10 mr-8 md:mr-16 relative">
         <div className="manifesto-progress absolute top-0 left-0 w-full h-full bg-[#00ffcc]" />
       </div>
-      <div className="max-w-5xl">
+      <div className="max-w-5xl relative z-10">
         <p className="font-mono text-[#00ffcc] text-sm mb-8 tracking-widest uppercase">[ 01. Manifesto ]</p>
         <p ref={aboutTextRef} className="text-3xl md:text-6xl font-serif leading-tight text-white/90">
           We engineer digital experiences that blur the line between art and mathematics. 
           By fusing kinetic typography with high-performance WebGL, we build interfaces 
           that don't just function—they breathe.
         </p>
+      </div>
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 h-2/3 opacity-20 pointer-events-none grayscale hover:grayscale-0 transition-all duration-700">
+        <img src="/assets/images/about-manifesto.png" alt="Manifesto Visual" className="w-full h-full object-contain" />
       </div>
     </section>
   );

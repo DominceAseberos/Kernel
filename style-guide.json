@@ -1,0 +1,62 @@
+{
+  "style_name": "Refokus Prism & Glass",
+  "base_prompt": "Futuristic high-tech blueprint interface, prism and glass aesthetic, dark navy background #0a0f1a, cyan neon lines #00ffcc, translucent layers, complex geometric data visualization, technical schematic, 8k resolution, minimalist, architectural, macro photography, shallow depth of field.",
+  "color_palette": {
+    "background": "#0a0f1a",
+    "primary": "#00ffcc",
+    "secondary": "#ffffff",
+    "accent": "rgba(0, 255, 204, 0.2)"
+  },
+  "assets": [
+    {
+      "filename": "hero-hd.png",
+      "section": "Hero",
+      "prompt": "Futuristic high-tech core engine, central spherical energy source, glass casing, cyan glowing internal circuits, prism refraction, blueprint grid background, cinematic lighting."
+    },
+    {
+      "filename": "hero-wire.png",
+      "section": "Hero",
+      "prompt": "Wireframe schematic of a futuristic core engine, thin white and cyan lines on dark background, architectural drawing style, technical annotations, minimalist."
+    },
+    {
+      "filename": "project-neural-hd.png",
+      "section": "Project",
+      "prompt": "Abstract neural network visualization, interconnected glass nodes, glowing cyan fiber optic connections, deep perspective, bokeh background, high-end 3D render."
+    },
+    {
+      "filename": "project-neural-wire.png",
+      "section": "Project",
+      "prompt": "Technical wireframe of a neural network grid, cyan digital structure, data flow lines, blueprint aesthetic, schematic."
+    },
+    {
+      "filename": "module-a.png",
+      "section": "Marquee",
+      "prompt": "Close-up of a glass UI module, holographic code snippet floating inside, prism edge lighting, cyan glow, blurred tech background."
+    },
+    {
+      "filename": "module-b.png",
+      "section": "Marquee",
+      "prompt": "Futuristic motherboard CPU socket, glass cover, glowing cyan data tracks, macro shot, shallow depth of field, high-tech aesthetic."
+    },
+    {
+      "filename": "about-manifesto.png",
+      "section": "About",
+      "prompt": "Minimalist abstract architectural glass sculpture, prism refraction of cyan light #00ffcc, dark navy background #0a0f1a, futuristic art piece."
+    },
+    {
+      "filename": "stack-1.png",
+      "section": "Stack (Phase 1)",
+      "prompt": "Futuristic blueprint wireframe of a building or complex system, thin cyan lines #00ffcc, grid background, architectural layout."
+    },
+    {
+      "filename": "stack-2.png",
+      "section": "Stack (Phase 2)",
+      "prompt": "Kinetic motion paths, glowing cyan trails #00ffcc in a dark 3D space, fluid dynamics visualization, technical choreography."
+    },
+    {
+      "filename": "stack-3.png",
+      "section": "Stack (Phase 3)",
+      "prompt": "High-end 3D render of a glass prism reflecting a rainbow of data, cyan highlights #00ffcc, polished finish, 8k resolution."
+    }
+  ]
+}

@@ -75,18 +75,16 @@ export const ProjectSection = () => {
       >
         {/* Wireframe Image */}
         <img 
-          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop" 
+          src="/assets/images/project-neural-wire.png" 
           alt="Project Wireframe"
           className="project-img-wireframe absolute inset-0 w-full h-full object-cover opacity-80"
           style={{ filter: 'contrast(1.2) saturate(0) sepia(1) hue-rotate(130deg) brightness(0.8)' }}
-          referrerPolicy="no-referrer"
         />
         {/* HD Image (Hidden initially) */}
         <img 
-          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop" 
+          src="/assets/images/project-neural-hd.png" 
           alt="Project HD"
           className="project-img-hd absolute inset-0 w-full h-full object-cover opacity-0"
-          referrerPolicy="no-referrer"
         />
         
         {/* Flash Overlay */}

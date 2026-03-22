@@ -16,6 +16,8 @@ import { About } from './components/sections/About';
 import { Marquee } from './components/sections/Marquee';
 import { ProjectSection } from './components/sections/ProjectSection';
 import { Stack } from './components/sections/Stack';
+import { Testimonials } from './components/sections/Testimonials';
+import { Contact } from './components/sections/Contact';
 import { Footer } from './components/sections/Footer';
 
 import Preloader from './components/ui/Preloader';
@@ -87,7 +89,9 @@ export default function App() {
           <About />
           <Marquee />
           <ProjectSection />
+          <Testimonials />
           <Stack />
+          <Contact />
           <Footer />
         </div>
       )}

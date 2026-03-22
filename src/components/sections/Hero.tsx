@@ -112,18 +112,16 @@ export const Hero = () => {
         style={{ clipPath: 'inset(50%)' }}
       >
         <img
-          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
+          src="/assets/images/hero-wire.png"
           alt="Wireframe render"
           className="absolute inset-0 w-full h-full object-cover opacity-80"
           style={{ filter: 'grayscale(100%) contrast(1.2) brightness(0.8)' }}
-          referrerPolicy="no-referrer"
         />
         <img
-          src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
+          src="/assets/images/hero-hd.png"
           alt="Wireframe colored render"
           className="hero-colored-img absolute inset-0 w-full h-full object-cover opacity-0"
           style={{ filter: 'grayscale(0%) contrast(1.2) brightness(1)' }}
-          referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-[#00ffcc]/10 mix-blend-overlay" />
       </div>
