@@ -47,7 +47,7 @@ export const Footer = () => {
         </div>
         
         <MagneticButton href="mailto:hello@example.com" className="font-mono text-white text-xl md:text-3xl hover:text-[#00ffcc] transition-colors flex items-center gap-4 group bg-white/5 px-8 py-4 rounded-full border border-white/10 backdrop-blur-md">
-          SYSTEM.CONNECT() <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+          START CONSULTATION <ArrowRight className="group-hover:translate-x-2 transition-transform" />
         </MagneticButton>
       </div>
 

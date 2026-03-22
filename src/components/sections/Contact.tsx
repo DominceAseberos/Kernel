@@ -40,9 +40,9 @@ export const Contact = () => {
       <div className="max-w-4xl w-full">
         <div className="mb-12">
             <h2 className="text-5xl md:text-8xl font-bold mb-4 tracking-tighter uppercase italic text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>
-                INITIATE_SESSION
+                PROFESSIONAL_INQUIRY
             </h2>
-            <p className="font-mono text-xs text-[#00ffcc] opacity-60 tracking-widest">[ SECURITY_LEVEL: ALPHA // ENCRYPTED_TUNNEL ]</p>
+            <p className="font-mono text-xs text-[#00ffcc] opacity-60 tracking-widest">[ SECURITY_LEVEL: ALPHA // SECURE_CHANNEL ]</p>
         </div>
 
         <div className="bg-black/40 border border-[#00ffcc]/20 rounded-lg p-6 md:p-12 backdrop-blur-xl relative overflow-hidden group hover:border-[#00ffcc]/40 transition-colors">
@@ -86,8 +86,8 @@ export const Contact = () => {
                     <div className="w-20 h-20 rounded-full border border-[#00ffcc] flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(0,255,204,0.3)]">
                         <span className="text-[#00ffcc] text-4xl font-bold">✓</span>
                     </div>
-                    <h3 className="text-3xl md:text-5xl font-bold uppercase italic text-[#00ffcc]">SIGNAL_SENT</h3>
-                    <p className="font-mono text-xs text-white/40 tracking-widest mt-2 uppercase">Your transmission has been successfuly intercepted. Expect return signal soon.</p>
+                    <h3 className="text-3xl md:text-5xl font-bold uppercase italic text-[#00ffcc]">INQUIRY_RECEIVED</h3>
+                    <p className="font-mono text-xs text-white/40 tracking-widest mt-2 uppercase">Your inquiry has been successfully transmitted. We will provide a formal response within 24 hours.</p>
                 </div>
             )}
         </div>
