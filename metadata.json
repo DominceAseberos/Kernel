@@ -1,0 +1,5 @@
+{
+  "name": "Refokus",
+  "description": "A high-end scroll-triggered animation recreating the Refokus project reveal with a Prism & Glass aesthetic using GSAP and SplitType.",
+  "requestFramePermissions": []
+}

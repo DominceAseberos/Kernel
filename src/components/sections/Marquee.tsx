@@ -1,0 +1,68 @@
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+export const Marquee = () => {
+  const marqueeRef = useRef<HTMLDivElement>(null);
+  const marqueeInnerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      if (marqueeRef.current && marqueeInnerRef.current) {
+        const tween = gsap.to(marqueeInnerRef.current, {
+          xPercent: -50,
+          ease: "none",
+          duration: 15,
+          repeat: -1,
+        });
+
+        ScrollTrigger.create({
+          trigger: marqueeRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          onUpdate: (self) => {
+            const velocity = Math.abs(self.getVelocity());
+            const marqueeSpeed = 1 + velocity / 200;
+            gsap.to(tween, { timeScale: marqueeSpeed, duration: 0.2 });
+          }
+        });
+      }
+    });
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
+
+  return (
+    <section id="process" ref={marqueeRef} className="py-32 overflow-hidden bg-[#05080f] relative border-y border-[#00ffcc]/20 z-20">
+      <div className="absolute inset-0 blueprint-grid opacity-10" />
+      
+      <div className="relative z-10 flex flex-col gap-8">
+        <div className="flex whitespace-nowrap" ref={marqueeInnerRef}>
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="flex items-center gap-8 px-4">
+              <span className="text-6xl md:text-8xl font-mono text-transparent" style={{ WebkitTextStroke: '1px #00ffcc' }}>
+                {"{ INIT_SEQUENCE }"}
+              </span>
+              <span className="text-6xl md:text-8xl font-serif italic text-white/50">
+                SYS.RENDER
+              </span>
+              <span className="text-6xl md:text-8xl font-mono text-[#00ffcc]">
+                [0x8F2A]
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Floating Image Cards with Magnification Distortion */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-80 bg-white/5 border border-[#00ffcc]/30 rounded-xl overflow-hidden z-20 hidden md:block" style={{ backdropFilter: 'blur(5px) saturate(200%)' }}>
+         <div className="absolute bottom-4 left-4 font-mono text-xs text-[#00ffcc] bg-black/80 px-2 py-1 rounded">MODULE_A.tsx</div>
+      </div>
+      <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-48 h-64 bg-white/5 border border-[#00ffcc]/30 rounded-xl overflow-hidden z-20 hidden md:block" style={{ backdropFilter: 'blur(5px) saturate(200%)' }}>
+         <div className="absolute bottom-4 left-4 font-mono text-xs text-[#00ffcc] bg-black/80 px-2 py-1 rounded">CORE_LOGIC.ts</div>
+      </div>
+    </section>
+  );
+};

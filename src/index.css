@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --color-navy: #0a0f1a;
+  --color-neon: #00ffcc;
+}
+
+/*
+  ── OVERFLOW FIX ────────────────────────────────────────────────────────────
+  overflow-x: hidden must live on <html>, NOT on <body> or any React div.
+
+  WHY: overflow-x on <body> makes the body become the scroll container
+  instead of the viewport. GSAP's pin:true uses position:fixed, which
+  anchors to the scroll container — if that's body and not the viewport,
+  pins visually break and scroll past immediately.
+
+  overflow-x on <html> clips horizontal overflow without creating a new
+  scroll container, so position:fixed still anchors to the true viewport.
+  ────────────────────────────────────────────────────────────────────────────
+*/
+html {
+  overflow-x: hidden;
+  /* Safe — does not break position:fixed */
+}
+
+body {
+  background-color: var(--color-navy);
+  color: #ffffff;
+  /* ── REMOVED: overflow-x: hidden from body — this was killing the pin ── */
+  font-family: var(--font-serif);
+}
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(0, 255, 204, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 204, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.char {
+  display: inline-block;
+}
+
+/* Hide cursor globally for custom cursor system */
+*,
+*::before,
+*::after {
+  cursor: none !important;
+}
+
+/* Restore cursor on mobile (Cursor component is not rendered on mobile) */
+@media (pointer: coarse) {
+
+  *,
+  *::before,
+  *::after {
+    cursor: auto !important;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
