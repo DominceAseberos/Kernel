@@ -65,25 +65,25 @@ export const Testimonials = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="testimonials" className="py-64 bg-[#0a0f1a] relative overflow-hidden z-20">
+    <section ref={sectionRef} id="testimonials" className="py-24 md:py-64 bg-[#0a0f1a] relative overflow-hidden z-20">
       <h2 className="sr-only">Client Testimonials</h2>
       <div className="absolute inset-0 blueprint-grid opacity-10" />
       
-      <div className="max-w-7xl mx-auto px-8 relative z-10">
-        <div className="font-mono text-[10px] text-[#00ffcc] mb-12 flex items-center gap-4">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+        <div className="font-mono text-[10px] text-[#00ffcc] mb-8 md:mb-12 flex items-center gap-4">
           <span className="w-2 h-2 bg-[#00ffcc] rounded-full animate-pulse" />
           TRANSMISSION_LOG_v4.0
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {TESTIMONIALS.map((t) => (
-            <div key={t.id} className="transmission-line border-l border-[#00ffcc]/30 pl-8 py-4 bg-white/2 hover:bg-[#00ffcc]/5 transition-colors group cursor-crosshair">
-              <p className="text-xl md:text-2xl font-serif italic text-white/90 mb-8 leading-tight group-hover:text-white transition-colors">
+            <div key={t.id} className="transmission-line border-l border-[#00ffcc]/30 pl-6 md:pl-8 py-4 bg-white/2 hover:bg-[#00ffcc]/5 transition-colors group cursor-crosshair">
+              <p className="text-lg md:text-2xl font-serif italic text-white/90 mb-6 md:mb-8 leading-tight group-hover:text-white transition-colors">
                 "{t.text}"
               </p>
               <div>
-                <p className="font-mono text-[#00ffcc] text-xs font-bold">{t.author}</p>
-                <p className="font-mono text-white/40 text-[10px] uppercase tracking-widest">{t.role}</p>
+                <p className="font-mono text-[#00ffcc] text-[10px] md:text-xs font-bold">{t.author}</p>
+                <p className="font-mono text-white/40 text-[9px] md:text-[10px] uppercase tracking-widest">{t.role}</p>
               </div>
             </div>
           ))}
@@ -91,9 +91,9 @@ export const Testimonials = () => {
       </div>
 
       {/* Infinite Logo Rail */}
-      <div className="mt-48 relative py-12 border-y border-white/5 bg-white/2 overflow-hidden">
+      <div className="mt-24 md:mt-48 relative py-8 md:py-12 border-y border-white/5 bg-white/2 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0f1a] via-transparent to-[#0a0f1a] z-10" />
-        <div ref={trackRef} className="flex gap-24 whitespace-nowrap px-12">
+        <div ref={trackRef} className="flex gap-12 md:gap-24 whitespace-nowrap px-6 md:px-12">
           {[...LOGOS, ...LOGOS].map((logo, i) => (
             <div 
               key={i} 
@@ -103,7 +103,7 @@ export const Testimonials = () => {
               <img 
                 src={logo} 
                 alt="Client Logo" 
-                className="h-12 md:h-20 w-auto"
+                className="h-10 md:h-20 w-auto"
               />
             </div>
           ))}

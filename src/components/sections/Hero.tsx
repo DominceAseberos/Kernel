@@ -16,28 +16,30 @@ export const Hero = () => {
     if (!heroRef.current) return;
     heroRef.current.getBoundingClientRect();
 
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 769px)",
+      isMobile: "(max-width: 768px)",
+    }, (context) => {
+      const { isMobile } = context.conditions!;
+      const spread = isMobile ? 200 : 500;
+      const scrollEnd = isMobile ? '+=100%' : '+=150%';
+
       const text = new SplitType(heroTitleRef.current!, { types: 'chars' });
 
       // ── FIX: Pre-set all chars to their final "exploded" state values ────────
-      // Store random values per char so forward AND reverse use identical
-      // coordinates — no snapping, no simultaneous assembly on reverse.
       const charData = text.chars!.map(() => ({
-        x: gsap.utils.random(-500, 500),
-        y: gsap.utils.random(-500, 500),
+        x: gsap.utils.random(-spread, spread),
+        y: gsap.utils.random(-spread, spread),
         rotationZ: gsap.utils.random(-45, 45),
       }));
 
-      // ── FIX: Use scrub: true with from() instead of to() ────────────────────
-      // gsap.from() on a scrub timeline means the "start" state is the
-      // exploded position and the "end" state is the assembled position.
-      // This makes reverse scrub naturally re-assemble chars WITH stagger
-      // instead of snapping them all back at once.
       const heroTl = gsap.timeline({
         scrollTrigger: {
           trigger: heroRef.current,
           start: 'top top',
-          end: '+=150%',
+          end: scrollEnd,
           scrub: 0.5,              // slightly higher scrub = smoother reverse
           pin: true,
           pinSpacing: true,
@@ -53,17 +55,14 @@ export const Hero = () => {
       });
 
       // Animate each char individually with pre-calculated values
-      // This gives scrub full per-char control in both directions
       text.chars!.forEach((char, i) => {
         heroTl.to(char, {
-          scale: 10,
+          scale: isMobile ? 5 : 10,
           opacity: 0,
-          // z: 1000,        ← remove this
           rotationZ: charData[i].rotationZ,
           x: charData[i].x,
           y: charData[i].y,
           ease: 'power2.inOut',
-          // force3D: true,  ← remove this
         }, i * 0.03);
       });
 
@@ -88,15 +87,15 @@ export const Hero = () => {
       }, 300);
 
       return () => clearTimeout(timer);
-    }, heroRef);
+    });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
     <section
       ref={heroRef}
-      className="h-screen w-full flex items-center justify-center relative blueprint-grid"
+      className="h-screen w-full flex items-center justify-center relative blueprint-grid px-4"
     >
       <div className="absolute inset-0 opacity-20 pointer-events-none flex flex-wrap">
         {Array.from({ length: 50 }).map((_, i) => (
@@ -106,7 +105,7 @@ export const Hero = () => {
 
       <h1
         ref={heroTitleRef}
-        className="text-[15vw] font-bold tracking-tighter uppercase text-white z-20"
+        className="text-[22vw] md:text-[15vw] font-bold tracking-tighter uppercase text-white z-20"
 
       >
         CRAFT

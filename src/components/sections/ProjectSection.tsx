@@ -21,29 +21,48 @@ export const ProjectSection = () => {
 
   useEffect(() => {
     if (reducedMotion) return;
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 769px)",
+      isMobile: "(max-width: 768px)",
+    }, (context) => {
       if (!projectSectionRef.current || !projectCardRef.current) return;
+      const { isMobile } = context.conditions!;
+      const scrollEnd = isMobile ? '+=120%' : '+=200%';
 
       const projectTl = gsap.timeline({
         scrollTrigger: {
           trigger: projectSectionRef.current,
           start: 'top top',
-          end: '+=200%',
-          scrub: 1,               // FIX 3: smoothed scrub, not instant
+          end: scrollEnd,
+          scrub: 1,
           pin: true,
-          pinSpacing: true,       // FIX 1a: was missing — GSAP needs this to
-          // correctly calculate scroll distances between pins
+          pinSpacing: true,
           anticipatePin: 1,
-          invalidateOnRefresh: true, // FIX 1b: recalculates on ST.refresh()
+          invalidateOnRefresh: true,
+          refreshPriority: 1, // Higher priority than default to ensure correct calculation
+          pinType: isMobile ? 'fixed' : 'transform', // Force fixed on mobile to prevent drift
         },
       });
 
+      // Expand card
       projectTl.to(projectCardRef.current, {
         width: '100vw',
         height: '100vh',
         borderRadius: '0px',
+        duration: 1,
         ease: 'power2.inOut',
-      }, 0);
+      }, 0.1);
+
+      // Force refresh after mount for layout stabilization
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 500);
+
+      return () => {
+        clearTimeout(timer);
+      };
 
       projectTl.to('.project-flash', { opacity: 1, duration: 0.05, ease: 'none' }, 0.9);
       projectTl.to('.project-flash', { opacity: 0, duration: 0.05, ease: 'none' }, 0.95);
@@ -53,12 +72,12 @@ export const ProjectSection = () => {
       projectTl.fromTo(
         '.project-info',
         { y: 50 },
-        { y: -20, ease: 'power2.inOut' },
+        { y: isMobile ? 0 : -20, ease: 'power2.inOut' },
         0
       );
     });
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
@@ -67,7 +86,7 @@ export const ProjectSection = () => {
     <section
       id="work"
       ref={projectSectionRef}
-      className="h-screen w-full flex items-center justify-center relative bg-[#0a0f1a] z-20"
+      className="min-h-[100dvh] w-full flex items-center justify-center relative bg-[#0a0f1a] z-20"
     >
       <div className="absolute inset-0 blueprint-grid opacity-20" />
 
@@ -87,7 +106,7 @@ export const ProjectSection = () => {
             gsap.to(projectCardRef.current, { scale: 1, duration: 0.4 });
         }}
         data-cursor="crosshair"
-        className="relative w-[300px] h-[400px] rounded-[24px] overflow-hidden z-20 border border-[#00ffcc]/50 shadow-[0_0_30px_rgba(0,255,204,0.2)] bg-black"
+        className="relative w-[260px] h-[360px] md:w-[300px] md:h-[400px] rounded-[24px] overflow-hidden z-20 border border-[#00ffcc]/50 shadow-[0_0_30px_rgba(0,255,204,0.2)] bg-black"
       >
         <img
           src="/assets/images/project-neural-wire.png"
@@ -102,12 +121,12 @@ export const ProjectSection = () => {
         />
         <div className="project-flash absolute inset-0 bg-white opacity-0 z-10" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a] via-transparent to-transparent z-10" />
-        <div className="project-info absolute bottom-8 left-8 right-8 flex justify-between items-end z-20">
+        <div className="project-info absolute bottom-8 left-6 md:left-8 right-6 md:right-8 flex justify-between items-end z-20">
           <div>
-            <p className="font-mono text-[#00ffcc] text-sm mb-2">PROJECT_01</p>
-            <h2 className="text-4xl md:text-6xl font-bold">NEURAL_NET</h2>
+            <p className="font-mono text-[#00ffcc] text-[10px] md:text-sm mb-2">PROJECT_01</p>
+            <h2 className="text-3xl md:text-6xl font-bold uppercase tracking-tight">NEURAL_NET</h2>
           </div>
-          <div className="font-mono text-xs text-white/50 text-right">
+          <div className="font-mono text-[8px] md:text-xs text-white/50 text-right">
             <p>STATUS: ACTIVE</p>
             <p>RENDER: 100%</p>
           </div>

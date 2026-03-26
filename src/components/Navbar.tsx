@@ -44,9 +44,9 @@ export const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 w-full p-6 md:p-8 flex justify-between items-center z-50 text-white font-mono text-sm pointer-events-none bg-black/5 backdrop-blur-sm shadow-sm" style={{ backdropFilter: 'blur(10px)' }}>
-      <div className="font-bold text-xl tracking-widest pointer-events-auto cursor-pointer flex items-center gap-2">
+      <div className="font-bold text-lg md:text-xl tracking-widest pointer-events-auto cursor-pointer flex items-center gap-2">
         KERNEL
-        <div className={`w-2 h-2 bg-[#00ffcc] rounded-full ${isExecuting ? 'animate-spin' : 'animate-pulse'}`} style={{ transformOrigin: 'center' }}>
+        <div className={`w-1.5 h-1.5 md:w-2 md:h-2 bg-[#00ffcc] rounded-full ${isExecuting ? 'animate-spin' : 'animate-pulse'}`} style={{ transformOrigin: 'center' }}>
           {isExecuting && <div className="w-full h-full border-t border-black rounded-full" />}
         </div>
       </div>
@@ -58,7 +58,7 @@ export const Navbar = () => {
         <a href="#work" onClick={handleScrollTo} onMouseEnter={playTick} data-cursor="focus" className="hover:text-[#00ffcc] transition-colors uppercase tracking-widest text-[11px]">Archive</a>
       </div>
 
-      <div className="flex items-center gap-4 pointer-events-auto">
+      <div className="flex items-center gap-3 md:gap-4 pointer-events-auto">
         <div className="hidden md:flex flex-col text-right text-[10px] text-[#00ffcc] opacity-70">
           <span>STATUS: {isExecuting ? 'EXECUTING' : 'IDLE'}</span>
           <span>MEM: 0x8F2A</span>
@@ -68,14 +68,14 @@ export const Navbar = () => {
           onClick={toggleMute}
           onMouseEnter={playTick}
           data-cursor="focus"
-          className="p-2 border border-white/10 rounded-full hover:bg-white/10 transition-colors"
+          className="p-1.5 md:p-2 border border-white/10 rounded-full hover:bg-white/10 transition-colors"
           title={isMuted || reducedMotion ? "Unmute" : "Mute"}
         >
-          {isMuted || reducedMotion ? <VolumeX className="w-4 h-4 text-white/40" /> : <Volume2 className="w-4 h-4 text-[#00ffcc]" />}
+          {isMuted || reducedMotion ? <VolumeX className="w-3.5 h-3.5 md:w-4 md:h-4 text-white/40" /> : <Volume2 className="w-3.5 h-3.5 md:w-4 md:h-4 text-[#00ffcc]" />}
         </button>
 
-        <button onMouseEnter={playTick} data-cursor="focus" className="border border-white/20 px-8 py-2.5 rounded-full hover:bg-white hover:text-black transition-all uppercase tracking-[0.2em] text-[10px] flex items-center gap-2 group bg-white/5">
-          Consultation <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        <button onMouseEnter={playTick} data-cursor="focus" className="border border-white/20 px-4 md:px-8 py-2 md:py-2.5 rounded-full hover:bg-white hover:text-black transition-all uppercase tracking-[0.2em] text-[9px] md:text-[10px] flex items-center gap-2 group bg-white/5">
+          Consultation <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform hidden sm:block" />
         </button>
       </div>
     </nav>

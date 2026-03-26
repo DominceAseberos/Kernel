@@ -23,9 +23,9 @@ export const Speedometer = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-8 right-8 z-50 font-mono text-xs text-[#00ffcc] mix-blend-difference pointer-events-none flex flex-col items-end">
-      <span className="opacity-50">VELOCITY</span>
-      <span className="text-xl">{scrollSpeed} px/s</span>
+    <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 font-mono text-[10px] md:text-xs text-[#00ffcc] mix-blend-difference pointer-events-none flex flex-col items-end">
+      <span className="opacity-50 tracking-widest uppercase">VELOCITY</span>
+      <span className="text-base md:text-xl font-bold">{scrollSpeed} px/s</span>
     </div>
   );
 };

@@ -65,15 +65,15 @@ export const Marquee = () => {
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center gap-8 px-4">
               <span
-                className="text-6xl md:text-8xl font-mono text-transparent"
+                className="text-4xl md:text-8xl font-mono text-transparent"
                 style={{ WebkitTextStroke: '1px #00ffcc' }}
               >
                 {'{ INIT_SEQUENCE }'}
               </span>
-              <span className="text-6xl md:text-8xl font-serif italic text-white/50">
+              <span className="text-4xl md:text-8xl font-serif italic text-white/50">
                 SYS.RENDER
               </span>
-              <span className="text-6xl md:text-8xl font-mono text-[#00ffcc]">
+              <span className="text-4xl md:text-8xl font-mono text-[#00ffcc]">
                 [0x8F2A]
               </span>
             </div>
